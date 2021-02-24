@@ -1,13 +1,17 @@
 import styled from 'styled-components/macro'
 import Button from './Button'
 
-export default function Player({ name, score, onMinus, onPlus }) {
-  const hue = Math.min(score * 10, 120)
+const MAX_HUE_VALUE = 120 // 120 is green
+const MIN_HUE_VALUE = 0 // 0 is red
 
+export default function Player({ name, score, onMinus, onPlus }) {
+  const maxHue = Math.min(score * 10, MAX_HUE_VALUE)
+  const hue = Math.max(maxHue, MIN_HUE_VALUE)
+  const color = score === 10 ? 'black' : `hsl(${hue}, 50%, 50%)`
   return (
     <PlayerWrapper>
       {name}
-      <PlayerScore color={`hsl(${hue}, 50%, 50%)`}>
+      <PlayerScore color={color}>
         <Button onClick={onMinus}>-</Button>
         <span>{score}</span>
         <Button onClick={onPlus}>+</Button>
