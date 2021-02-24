@@ -1,16 +1,26 @@
 import React from 'react'
-import './HistoryEntry.css'
+import styled from 'styled-components'
 
 export default function HistoryEntry({ nameOfGame, players }) {
   return (
-    <section className="HistoryEntry">
+    <Wrapper>
       {nameOfGame}
       {players.map((player, index) => (
-        <div key={index} className="HistoryEntry__player">
+        <Player key={index}>
           <span>{player.name}</span>
           <span>{player.score}</span>
-        </div>
+        </Player>
       ))}
-    </section>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.section`
+  display: grid;
+  gap: 10px;
+`
+
+const Player = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

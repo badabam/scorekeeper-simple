@@ -1,9 +1,0 @@
-.HistoryEntry {
-  display: grid;
-  gap: 10px;
-}
-
-.HistoryEntry__player {
-  display: flex;
-  justify-content: space-between;
-}

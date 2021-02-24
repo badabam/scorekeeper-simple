@@ -1,6 +1,7 @@
 import React from 'react'
-import './Header.css'
+import styled from 'styled-components'
 
-export default function Header({ text }) {
-  return <header className="Header">{text}</header>
-}
+export default styled.header`
+  padding: 12px;
+  text-align: center;
+`
