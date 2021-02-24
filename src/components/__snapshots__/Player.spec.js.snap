@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player changes the color based on score 1`] = `
+.c0 {
+  color: black;
+}
+
+<span
+  class="c0"
+  color="black"
+>
+  0
+</span>
+`;
+
+exports[`Player changes the color based on score 2`] = `
+<span
+  class="Player__ColorScore-sc-1uws7bn-2 eecmQb"
+  color="hsl(100, 50%, 50%)"
+>
+  10
+</span>
+`;
+
+exports[`Player changes the color based on score 3`] = `
+<span
+  class="Player__ColorScore-sc-1uws7bn-2 dHBoRS"
+  color="hsl(0, 50%, 50%)"
+>
+  -10
+</span>
+`;

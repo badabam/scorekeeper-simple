@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HistoryEntry renders game data from props 1`] = `
+.c0 {
+  display: grid;
+  gap: 10px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<section
+  class="c0"
+>
+  Foo
+  <div
+    class="c1"
+  >
+    <span>
+      John
+    </span>
+    <span>
+      10
+    </span>
+  </div>
+  <div
+    class="c1"
+  >
+    <span>
+      Jane
+    </span>
+    <span>
+      20
+    </span>
+  </div>
+</section>
+`;
