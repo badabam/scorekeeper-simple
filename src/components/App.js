@@ -10,37 +10,49 @@ import PlayerForm from './PlayerForm'
 
 export default function App() {
   const [players, setPlayers] = useState([])
+  const [currentPage, setCurrentPage] = useState('play')
+
   return (
     <AppLayout>
-      <PlayerForm onAddPlayer={handleAddPlayer} />
-      {players.map(({ name, score }, index) => (
-        <Player
-          key={name}
-          name={name}
-          score={score}
-          onPlus={() => handlePlus(index)}
-          onMinus={() => handleMinus(index)}
-        />
-        // React.createElement(Player, {name, score, onPlus: () => handlePlus(index)})
-      ))}
-      <ButtonGrid>
-        <Button onClick={resetScores}>Reset scores</Button>
-        <DangerButton onClick={resetAll}>Reset all</DangerButton>
-      </ButtonGrid>
+      {/* conditional rendering */}
+      {currentPage === 'play' && (
+        <div>
+          <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
+        </div>
+      )}
 
-      <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
-      <Navigation
-        activeIndex={0}
-        onNavigate={index => console.log('onNavigate', index)}
-      />
-      <Header></Header>
-      <HistoryEntry
-        nameOfGame="Carcassonne"
-        players={[
-          { name: 'John Doe', score: 10 },
-          { name: 'Jane Doe', score: 20 },
-        ]}
-      />
+      {currentPage === 'game' && (
+        <div>
+          <Header>Carcassonne</Header>
+          {players.map(({ name, score }, index) => (
+            <Player
+              key={name}
+              name={name}
+              score={score}
+              onPlus={() => handlePlus(index)}
+              onMinus={() => handleMinus(index)}
+            />
+          ))}
+          <Button onClick={resetScores}>Reset scores</Button>
+          <Button onClick={() => console.log('end game')}>End game</Button>
+        </div>
+      )}
+
+      {currentPage === 'history' && (
+        <div>
+          <HistoryEntry
+            nameOfGame="Carcassonne"
+            players={[
+              { name: 'John Doe', score: 10 },
+              { name: 'Jane Doe', score: 20 },
+            ]}
+          />
+        </div>
+      )}
+
+      {(currentPage === 'play' || currentPage === 'history') && (
+        <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
+      )}
     </AppLayout>
   )
 

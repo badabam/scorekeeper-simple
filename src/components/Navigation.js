@@ -2,13 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 
-export default function Navigation({ onNavigate, activeIndex }) {
+export default function Navigation({ onNavigate, currentPage }) {
   return (
     <Nav>
-      <Button isActive={activeIndex === 0} onClick={() => onNavigate(0)}>
+      <Button
+        isActive={currentPage === 'play'}
+        onClick={() => onNavigate('play')}
+      >
         Play
       </Button>
-      <Button isActive={activeIndex === 1} onClick={() => onNavigate(1)}>
+      <Button
+        isActive={currentPage === 'history'}
+        onClick={() => onNavigate('history')}
+      >
         History
       </Button>
     </Nav>
