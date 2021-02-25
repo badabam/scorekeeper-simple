@@ -7,6 +7,7 @@ import HistoryEntry from './HistoryEntry'
 import Navigation from './Navigation'
 import Player from './Player'
 import { v4 as uuidv4 } from 'uuid'
+import CreatePage from './CreatePage'
 
 export default function App() {
   const [players, setPlayers] = useState([])
@@ -17,11 +18,7 @@ export default function App() {
   return (
     <AppLayout>
       {/* conditional rendering */}
-      {currentPage === 'play' && (
-        <div>
-          <GameForm onCreateGame={createGame} />
-        </div>
-      )}
+      {currentPage === 'play' && <CreatePage onCreateGame={createGame} />}
 
       {currentPage === 'game' && (
         <div>
