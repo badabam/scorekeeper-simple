@@ -12,13 +12,13 @@ import CreatePage from './CreatePage'
 export default function App() {
   const [players, setPlayers] = useState([])
   const [nameOfGame, setNameOfGame] = useState('')
-  const [currentPage, setCurrentPage] = useState('play')
+  const [currentPage, setCurrentPage] = useState('create')
   const [history, setHistory] = useState([])
 
   return (
     <AppLayout>
       {/* conditional rendering */}
-      {currentPage === 'play' && <CreatePage onCreateGame={createGame} />}
+      {currentPage === 'create' && <CreatePage onCreateGame={createGame} />}
 
       {currentPage === 'game' && (
         <div>
@@ -45,7 +45,7 @@ export default function App() {
         </HistoryWrapper>
       )}
 
-      {(currentPage === 'play' || currentPage === 'history') && (
+      {(currentPage === 'create' || currentPage === 'history') && (
         <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
       )}
     </AppLayout>
@@ -62,7 +62,7 @@ export default function App() {
     setHistory([{ players, nameOfGame, id: uuidv4() }, ...history])
     setPlayers([])
     setNameOfGame('')
-    setCurrentPage('play')
+    setCurrentPage('create')
   }
 
   function resetScores() {
