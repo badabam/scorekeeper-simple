@@ -1,14 +1,10 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import Button from './Button'
-import GameForm from './GameForm'
-import Header from './Header'
-import HistoryEntry from './HistoryEntry'
 import Navigation from './Navigation'
-import Player from './Player'
 import { v4 as uuidv4 } from 'uuid'
 import CreatePage from './CreatePage'
 import GamePage from './GamePage'
+import HistoryPage from './HistoryPage'
 
 export default function App() {
   const [players, setPlayers] = useState([])
@@ -32,13 +28,7 @@ export default function App() {
         />
       )}
 
-      {currentPage === 'history' && (
-        <HistoryWrapper>
-          {history.map(({ nameOfGame, players, id }) => (
-            <HistoryEntry key={id} nameOfGame={nameOfGame} players={players} />
-          ))}
-        </HistoryWrapper>
-      )}
+      {currentPage === 'history' && <HistoryPage history={history} />}
 
       {(currentPage === 'create' || currentPage === 'history') && (
         <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
@@ -87,9 +77,4 @@ const AppLayout = styled.div`
   display: grid;
   gap: 20px;
   padding: 20px;
-`
-
-const HistoryWrapper = styled.div`
-  display: grid;
-  gap: 28px;
 `
