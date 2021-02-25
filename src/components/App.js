@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { v4 as uuidv4 } from 'uuid'
 import CreatePage from './CreatePage'
@@ -6,12 +6,18 @@ import GamePage from './GamePage'
 import HistoryPage from './HistoryPage'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import Navigation from './Navigation'
+import HistoryDetailPage from './HistoryDetailPage'
+import { loadFromLocal, saveToLocal } from '../lib/localStorage'
 
 export default function App() {
   const [players, setPlayers] = useState([])
   const [nameOfGame, setNameOfGame] = useState('')
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState(loadFromLocal('history') ?? [])
   const { push } = useHistory()
+
+  useEffect(() => {
+    saveToLocal('history', history)
+  }, [history])
 
   return (
     <AppLayout>
@@ -29,11 +35,17 @@ export default function App() {
             onEnd={endGame}
           />
         </Route>
-        <Route path="/history">
+        <Route exact path="/history">
           <HistoryPage history={history} />
         </Route>
+        <Route path="/history/:nameOfGame">
+          <HistoryDetailPage history={history} />
+        </Route>
       </Switch>
-      <Route exact path={['/', '/history']}>
+      <Route exact path="/">
+        <Navigation />
+      </Route>
+      <Route path="/history">
         <Navigation />
       </Route>
     </AppLayout>
