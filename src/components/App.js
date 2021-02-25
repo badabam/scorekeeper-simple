@@ -4,12 +4,14 @@ import { v4 as uuidv4 } from 'uuid'
 import CreatePage from './CreatePage'
 import GamePage from './GamePage'
 import HistoryPage from './HistoryPage'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
+import Navigation from './Navigation'
 
 export default function App() {
   const [players, setPlayers] = useState([])
   const [nameOfGame, setNameOfGame] = useState('')
   const [history, setHistory] = useState([])
+  const { push } = useHistory()
 
   return (
     <AppLayout>
@@ -31,21 +33,23 @@ export default function App() {
           <HistoryPage history={history} />
         </Route>
       </Switch>
+      <Route exact path={['/', '/history']}>
+        <Navigation />
+      </Route>
     </AppLayout>
   )
 
   function createGame({ nameOfGame, playerNames }) {
-    // playerNames is ['Jane', 'John']
     setNameOfGame(nameOfGame)
     setPlayers(playerNames.map(name => ({ name, score: 0 })))
-    //setCurrentPage('game')
+    push('/game')
   }
 
   function endGame() {
     setHistory([{ players, nameOfGame, id: uuidv4() }, ...history])
     setPlayers([])
     setNameOfGame('')
-    // setCurrentPage('create')
+    push('/history')
   }
 
   function resetScores() {
